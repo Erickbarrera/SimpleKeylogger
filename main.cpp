@@ -16,8 +16,6 @@ using namespace std;
 
 int LogIt(int key_stroke, char *file);
 void HideMe();
-//int save();
-
 
 /*
 In the main function it just loops for as long as the program
