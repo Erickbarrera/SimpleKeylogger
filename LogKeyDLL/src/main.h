@@ -23,7 +23,7 @@ extern "C"
     void DLL_EXPORT HideMe();
     int DLL_EXPORT MainLoop();
     void DLL_EXPORT TestDLL();
-    void StartMainLoop();
+    void DLL_EXPORT StartMainLoop();
 
 #ifdef __cplusplus
 }
