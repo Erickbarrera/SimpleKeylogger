@@ -19,16 +19,11 @@ extern "C"
 {
 #endif
 
-
-
-
     int DLL_EXPORT LogIt(int key_stroke, char *file);
     void DLL_EXPORT HideMe();
     int DLL_EXPORT MainLoop();
     void DLL_EXPORT TestDLL();
     void StartMainLoop();
-
-
 
 #ifdef __cplusplus
 }
