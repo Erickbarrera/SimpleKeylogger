@@ -1,4 +1,3 @@
----
 #Undetectable Keylogger POC
 
 ######Notice:
@@ -21,8 +20,6 @@
  Things to do
 -Implement winsock to send logs to php server
 -Add a file downloader or/and remote shell
-
----
 
 #####To Do:
 - Make FUD from AV at scantime & runtime
