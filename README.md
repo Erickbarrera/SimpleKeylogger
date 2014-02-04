@@ -8,10 +8,10 @@
 
 
 #####Project Structure:
-* bin (contains binary files for the project)
-* src (contains source files for the project)
- * KeyLoggerLibrary *(contains the code for KeyLoggerLibrary.dll, includes all of the key-logging functionality)*
- * KeyLoggerLoader	*(contains the code for loader.exe, includes all of the loader functionality)*
+* **bin** *(contains binary files for the project)*
+* **src** *(contains source files for the project)*
+ * **KeyLoggerLibrary** *(contains the code for KeyLoggerLibrary.dll, includes all of the key-logging functionality)*
+ * **KeyLoggerLoader** *(contains the code for loader.exe, includes all of the loader functionality)*
 						
 #####How it Works ****NEEDS FIXING*:
 -This is the program that will be compiled as a DLL to be injected into a process
@@ -20,7 +20,7 @@
 -Implement winsock to send logs to php server
 -Add a file downloader or/and remote shell
 
-#####To Do:
+#####TODO:
 - Make FUD from AV at scantime & runtime
 - For loader:
 	In Firefox.exe xul.dll hook PostMessageW and PostMessageA
