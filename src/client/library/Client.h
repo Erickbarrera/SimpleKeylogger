@@ -1,4 +1,3 @@
-
 //#define _WIN32_WINNT 0x501
 
 #include <winsock2.h>
@@ -14,6 +13,7 @@ class Client
 public:
     int iResult;
     SOCKET connectSocket;
+    UploadLog();
     Client(void);
     ~Client(void);
 };
