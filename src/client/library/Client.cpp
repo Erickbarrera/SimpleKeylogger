@@ -15,8 +15,6 @@ forwarding any ports on the "victim's" end.
 */
 
 //TODO: Create autoreconnect
-void UploadLog(SOCKET csock);
-void SendTestMesg(SOCKET csock);
 Client::Client(void)
 {
 	PCSTR host = "192.168.1.86";
