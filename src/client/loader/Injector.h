@@ -1,2 +1,3 @@
 #pragma once
-bool InjectDLL(char* process_name, char* dll_path);
+HANDLE FindProcess(const char* target_proc);
+bool InjectDLL(HANDLE hproc, char* dll_path);

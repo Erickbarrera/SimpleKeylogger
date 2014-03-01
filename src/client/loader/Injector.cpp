@@ -1,7 +1,6 @@
 #include <Windows.h>
 #include <psapi.h>
 #include "Injector.h"
-#include <string.h>
 
 // ### How to do process enumeration: http://msdn.microsoft.com/en-us/library/windows/desktop/ms682623%28v=vs.85%29.aspx
 // This function searchs for process by name and open for memory read/write access, and returns its handle
@@ -56,12 +55,8 @@ HANDLE FindProcess(const char* target_proc)
 }
 
 
-bool InjectDLL(char* process_name, char* dll_path)
+bool InjectDLL(HANDLE hproc, char* dll_path)
 {
-	HANDLE hproc = FindProcess(process_name);
-	if (hproc == NULL)
-		return false;
-
 	LPVOID LoadLibraryAddress = GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
 	// allocate memory in the remote process for our DLL path
 	LPVOID codeCave = VirtualAllocEx(hproc, NULL, strlen(dll_path), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
@@ -73,7 +68,6 @@ bool InjectDLL(char* process_name, char* dll_path)
 	// 
 	VirtualFreeEx(hproc, codeCave, 0, MEM_RELEASE | MEM_DECOMMIT);
 	CloseHandle(hthread);
-	CloseHandle(hproc);
 	return true;
 }
 

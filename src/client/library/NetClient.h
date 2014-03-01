@@ -13,12 +13,10 @@ public:
     ~NetClient(void);
 
 	bool UploadLog(char* filepath);
-	bool IsRemoteShellConnected();
 	void StartRemoteShell(const char* rhost_ip, const char* rhost_port);
 
 private:
 	NetClient();
-	bool isRemoveShellActive;
 	char hostip[MAX_PATH];
 	char hostname[MAX_PATH];
 	char port[MAX_PATH];
