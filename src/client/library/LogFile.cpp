@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "LogFile.h"
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -31,10 +31,29 @@ LogFile::~LogFile()
 	}
 }
 
+int LogFile::GetFileSize()
+{
+	int fsize = 0;
+	ifstream log_file(logFileName, ios::in|ios::binary|ios::ate);
+	if (log_file.is_open())
+	{
+		fsize = log_file.tellg();
+		log_file.close();
+	}
+	return fsize;
+}
+
 void LogFile::AppendString(char* str)
 {
 	ofstream log_file;
 	log_file.open(logFileName, ios::app);
 	log_file << str;
+	log_file.close();
+}
+
+void LogFile::FlushContents()
+{
+	ofstream log_file;
+	log_file.open(logFileName, ios::trunc);
 	log_file.close();
 }
