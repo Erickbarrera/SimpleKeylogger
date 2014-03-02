@@ -9,8 +9,8 @@
 * **bin** *(contains binary files for the project)*
 * **src** *(contains the source code files for the project)*
 * **src/client** *(contains the source code files for the client side)*
-* **src/client/loader** *(contains the source code files for the client loader executable **loader.exe**)*
-* **src/client/library** *(contains the source code files for the client keylogger library **library.dll**)*
+* **src/client/loader** *(contains the source code files for the client loader executable loader.exe)*
+* **src/client/library** *(contains the source code files for the client keylogger library library.dll)*
 * **src/server** *(contains the source code files for the server side)*
 
 ##How it Works:
