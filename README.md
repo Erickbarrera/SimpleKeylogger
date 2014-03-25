@@ -25,7 +25,7 @@ Attacker first needs to setup a server (PHP) using the script files provided. On
 
 >#####Server:
 * The server side provides the attacker a single location to view the log files of all the victims.
-* listen on a port with netcat for a remote shell into the machine.
+* Listen on a port with netcat for a remote shell into the machine.
 
 - - -
 
