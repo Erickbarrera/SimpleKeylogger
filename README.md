@@ -1,7 +1,7 @@
 #Simple Keylogger [POC]
 - - -
 ##Notice:
->This keylogger is considered a proof of concept for our [Ethical Hacking class final research project.](http://web.eng.fiu.edu/~aperezpo/EEL4789/index.htm)
+>This keylogger is considered a proof of concept for our EEL 4804 - Malware Reverse Engineering
 >It is in **no way** meant to be used for malicious purposes.
 
 ##Project Structure:
