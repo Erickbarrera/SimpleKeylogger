@@ -1,7 +1,7 @@
 #Simple Keylogger [POC]
 - - -
 ##Notice:
->This keylogger is considered a proof of concept for our Ethical Hacking and Malware Reverse Engineering course
+>This keylogger is considered a proof of concept for our Ethical Hacking and Malware Reverse Engineering courses
 >It is in **no way** meant to be used for malicious purposes.
 
 ##Project Structure:
